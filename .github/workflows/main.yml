@@ -10,14 +10,10 @@ on:
         - dev
 
 jobs:
-  Build:
-    name: Build
+  Run:
+    name: Run
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3.1.0
-      - name: init
-        run: shell/init.sh
-      - name: SHA-1 Compile
-        run: shell/SHA-1_Compile.sh
-      - name: Crypto Compile
-        run: shell/Crypto_Compile.sh
+      - uses: ./.github/workflows/Build.yml
+      - name: SHA-1 Test
+        run: dist/crypto abc
