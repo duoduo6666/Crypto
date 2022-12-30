@@ -3,7 +3,7 @@ run-name: Build
 on: workflow_call
 
 jobs:
-  Build_Ubuntu-22.04:
+  Build_Ubuntu-2204:
     name: Build Ubuntu-22.04
     runs-on: ubuntu-22.04
     steps:
