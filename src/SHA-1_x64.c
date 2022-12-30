@@ -108,6 +108,7 @@ int* SHA1(char const message[],unsigned long const len){
     return H;
 }
 
+// benchmark
 void ctrl_exit(int signum)
 {
     printf("\033[?25h");    // 显示光标
