@@ -1,5 +1,5 @@
-name: Crypto-C Actions
-run-name: Crypto-C Actions
+name: Crypto Actions
+run-name: Crypto Actions
 on: 
   pull_request:
     branches:
@@ -10,14 +10,12 @@ on:
         - dev
 
 jobs:
-  Crypto-Compile:
-    name: Crypto Compile
+  Build:
+    name: Build
     runs-on: ubuntu-22.04
-    env:
-      LD_LIBRARY_PATH: dist/
     steps:
-      - uses: actions/checkout@v3.1.0
       - name: init
+        uses: actions/checkout@v3.1.0
         run: shell/init.sh
       - name: SHA-1 Compile
         run: shell/SHA-1_Compile.sh
