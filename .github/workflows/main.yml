@@ -12,6 +12,7 @@ on:
 jobs:
   Run:
     name: Run
+    runs-on: ubuntu-22.04
     steps:
       - uses: ./.github/workflows/Build.yml
       - name: SHA-1 Test
