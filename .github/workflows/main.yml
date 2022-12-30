@@ -12,4 +12,7 @@ on:
 jobs:
   Run:
     name: Run
-    uses: ./.github/workflows/Build.yml
+    steps:
+      - uses: ./.github/workflows/Build.yml
+      - name: SHA-1 Test
+        run: dist/crypto abc
