@@ -110,6 +110,7 @@ int* SHA1(char const message[],unsigned long const len){
 
 void ctrl_exit(int signum)
 {
+    printf("\033[?25h");    // 显示光标
     printf("\n");
     exit(0);
 }
@@ -117,14 +118,15 @@ void ctrl_exit(int signum)
 void SHA1_benchmark(){
     char data[] = "abc";
     unsigned int len = 3;
-    clock_t clock_sec= CLOCKS_PER_SEC, start, end;
+    clock_t start, end;
     signal(SIGINT, ctrl_exit);
+    printf("\033[?25l");    // 隐藏光标
     while (1){
         start = clock();
         for(unsigned int i = 0; i < 1024; i++){
             SHA1(data,len);
         }
         end = clock();
-        printf("\r%lu/s",clock_sec/(end-start)*1024);
+        printf("\r%lu/s",CLOCKS_PER_SEC/(end-start)*1024);
     }
 }
