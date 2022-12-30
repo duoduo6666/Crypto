@@ -1,8 +1,6 @@
 name: Build
 run-name: Build
-on: 
-  workflow_call:
-
+on: workflow_call
 
 jobs:
   Build Ubuntu-22.04:
