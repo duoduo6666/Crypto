@@ -3,22 +3,35 @@ run-name: Crypto Actions
 on: 
   pull_request:
     branches:
-        - main
+    - main
+    paths:
+    - src/*
+    - .github/workflows/*
   push:
     branches:
-        - main
-        - dev
+    - main
+    - dev
+    paths:
+    - src/*
+    - .github/workflows/*
 
 jobs:
-  Build_Ubuntu-2204:
-    name: Build Ubuntu-22.04
+  Build_Ubuntu-2204_Docker-GCC:
+    name: Build Ubuntu-22.04 Docker-GCC
     runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        gcc-version: [12.2.0, 12.1.0, 11.3.0]
+    container:
+      image: gcc:${{ matrix.gcc-version }}
     steps:
-      - uses: actions/checkout@v3.1.0
-      - name: init
-        run: shell/init.sh
-      - name: SHA-1 Compile
-        run: shell/SHA-1_Compile.sh
-      - name: Crypto Compile
-        run: shell/Crypto_Compile.sh
-  
+    - uses: actions/checkout@v3.1.0
+    - name: Init
+      run: |
+        gcc --version
+        shell/init.sh
+    - name: SHA-1 Compile
+      run: shell/SHA-1_Compile.sh
+    - name: Crypto Compile
+      run: shell/Crypto_Compile.sh
+
