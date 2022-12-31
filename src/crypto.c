@@ -12,7 +12,10 @@ long argv_len(char const str[]){
     return i;
 }
 
-int main(int argc, char const *argv[]){
+int main(unsigned int argc, char const *argv[]){
+    if (argc == 1){
+        return 0;
+    }
     unsigned long len = argv_len(argv[1]);
     unsigned int *hash = SHA1(argv[1],len);
     printf("%x%x%x%x%x\n",hash[0],hash[1],hash[2],hash[3],hash[4]);
