@@ -17,11 +17,16 @@ on:
 
 jobs:
   Build_Ubuntu-2204_Docker-GCC:
-    name: Build Ubuntu-22.04 Docker-GCC
-    runs-on: ubuntu-22.04
     strategy:
       matrix:
-        gcc-version: [12.2.0, 12.1.0, 11.3.0]
+        gcc-version: [
+          12.2.0, 12.1.0, 
+          11.3.0, 11.2.0, 11.1.0, 
+          10.4.0, 10.3.0, 10.2.0, 10.1.0, 
+          9.5.0, 9.4.0, 9.3.0, 9.2.0, 9.1.0, 
+          8.5.0, ]
+    name: Build Ubuntu-22.04 Docker-GCC:${{ matrix.gcc-version }}
+    runs-on: ubuntu-22.04
     container:
       image: gcc:${{ matrix.gcc-version }}
     steps:
