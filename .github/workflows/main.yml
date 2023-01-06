@@ -38,6 +38,5 @@ jobs:
       run: |
         make init
         make
-        make init && time make
         make init && \time -v make
 
