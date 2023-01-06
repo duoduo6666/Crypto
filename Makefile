@@ -14,7 +14,7 @@ $(OUTDIR)/crypto : $(LIBDIR)/libSHA-1_x64.so src/crypto.c
 $(LIBDIR)/libSHA-1_x64.so : src/SHA-1_x64.c
 	$(CC) src/SHA-1_x64.c $(CDLL_FLAGS) -o $(LIBDIR)/libSHA-1_x64.so
 
-init: 
+init: clean
 	mkdir -p $(OUTDIR) $(LIBDIR)
 clean: 
 	rm -r -f $(OUTDIR)/crypto $(LIBDIR)/
