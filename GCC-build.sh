@@ -8,8 +8,8 @@ set -e                                      # 当遇到错误就停止
 trace_on
 
 shell/init.sh
-shell/SHA-1_Compile.sh
-shell/Crypto_Compile.sh
+shell/SHA-1_x64_Build.sh
+shell/Crypto_Build.sh
 
 trace_off
 
