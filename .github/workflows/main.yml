@@ -38,5 +38,5 @@ jobs:
       run: |
         make init
         make
-        (time make) 2>> b
+        (time make) 2>> $GITHUB_OUTPUT
 
