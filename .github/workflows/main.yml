@@ -29,9 +29,11 @@ jobs:
     runs-on: ubuntu-22.04
     container:
       image: gcc:${{ matrix.gcc-version }}
-    outputs: Build_time
+    outputs:
+      output1: ${{ steps.Build.outputs.test }}
     steps:
     - uses: actions/checkout@v3.1.0
+      id: Build
     - name: Build
       run: time (make init && make) >> $GITHUB_OUTPUT
 
