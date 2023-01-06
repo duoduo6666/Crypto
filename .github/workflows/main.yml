@@ -29,14 +29,9 @@ jobs:
     runs-on: ubuntu-22.04
     container:
       image: gcc:${{ matrix.gcc-version }}
+    outputs: Build_time
     steps:
     - uses: actions/checkout@v3.1.0
-    - name: Init
-      run: |
-        gcc --version
-        shell/init.sh
-    - name: SHA-1 Compile
-      run: shell/SHA-1_Compile.sh
-    - name: Crypto Compile
-      run: shell/Crypto_Compile.sh
+    - name: Build
+      run: time (make init && make) >> $GITHUB_OUTPUT
 
