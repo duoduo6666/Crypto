@@ -5,7 +5,7 @@ LIBDIR_		= lib/
 LIB			= SHA-1_x64
 CC			= gcc
 CBIT_FLAG	= -m64
-CFLAGS		= -l $(LIB) -L $(LIBDIR) $(CBIT_FLAG) -Wl,-rpath,$$ORIGIN/$(LIBDIR_) -O3 
+CFLAGS		= -l $(LIB) -L $(LIBDIR) $(CBIT_FLAG) -Wl,-rpath,'$$ORIGIN/$(LIBDIR_)' -O3 
 CDLL_FLAGS	=  $(CBIT_FLAG) -fPIC -shared -O3 
 
 $(OUTDIR)/crypto : $(LIBDIR)/libSHA-1_x64.so src/crypto.c

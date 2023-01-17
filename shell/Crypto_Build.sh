@@ -6,7 +6,7 @@
 gcc src/crypto.c                \
     -l SHA-1_x64                \
     -L dist/lib/                \
-    -Wl,-rpath,$ORIGIN/lib/     \
+    -Wl,-rpath,'$ORIGIN/lib/'   \
     -m64                        \
     -O3                         \
     -o dist/crypto
