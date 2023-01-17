@@ -39,7 +39,6 @@ struct node{
   int (*fp)(unsigned int argc, char *argv[]);
 };
 
-unsigned long algn = ALGN;
 struct node alg[ALGN] = {
     {"SHA-1", &SHA1_CLI},
     {"SHA1", &SHA1_CLI},
