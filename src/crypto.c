@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "../include/SHA-1_x64.h"
 
-#define ALGN 2
+#define ALGN 256
 
 #define ERROR1 "请输入算法和参数\n"
 #define ERROR2 "请输入参数\n"
