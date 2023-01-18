@@ -7,7 +7,7 @@
 #define ERROR2 "请输入参数\n"
 #define ERROR3 "不支持 %s 算法\n"
 
-long str_len(char str[]){
+unsigned long str_len(char str[]){
     unsigned long i = 0;
     char ASCII = 0xFF;
     while (ASCII != 0)
@@ -28,9 +28,7 @@ char str_cmp(char str0[],char str1[]){
 }
 
 int SHA1_CLI(unsigned int argc, char *argv[]){
-    unsigned long len = str_len(argv[2]);
-    unsigned int *hash = SHA1(argv[2],len);
-    printf("%x%x%x%x%x\n",hash[0],hash[1],hash[2],hash[3],hash[4]);
+    printf("%s\n",SHA1_hexstr(argv[2],str_len(argv[2]),"0123456789abcdef"));
     return 0;
 }
 
@@ -54,7 +52,6 @@ int main(unsigned int argc, char *argv[]){
         return 2;
     }
 
-    // 寻找算法在alg中的位置
     unsigned long i=0;
     while (str_cmp(alg[i].name,argv[1]) == 0)
     {

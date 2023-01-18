@@ -108,6 +108,22 @@ int* SHA1(char message[],unsigned long len){
     return H;
 }
 
+char* SHA1_hexstr(char message[], unsigned long len, char hex[16]){
+    unsigned int* H = SHA1(message, len);
+    static char str[41];
+
+    char i = 0;
+    for (char i0 = 0; i0 < 5; i0++){
+        for (char i1 = 24; i1 >= 0; i1-=8){
+            str[i] = hex[(unsigned char)(H[i0]>>i1) / 16];
+            i++;
+            str[i] = hex[(unsigned char)(H[i0]>>i1) % 16];
+            i++;
+        }
+    }
+    return str;
+}
+
 // benchmark
 void ctrl_exit(int signum)
 {
