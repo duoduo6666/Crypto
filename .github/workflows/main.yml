@@ -1,25 +1,36 @@
-name: Crypto-C Actions
-run-name: Crypto-C Actions
+name: Crypto Actions
+run-name: Crypto Actions
 on: 
   pull_request:
     branches:
-        - main
+    - main
+    paths:
+    - src/*
+    - .github/workflows/*
   push:
     branches:
-        - main
-        - dev
+    - main
+    - dev
+    paths:
+    - src/*
+    - .github/workflows/*
 
 jobs:
-  Crypto-Compile:
-    name: Crypto Compile
+  Build_Ubuntu-2204_Docker-GCC:
+    strategy:
+      matrix:
+        gcc-version: [
+          12.2.0, 12.1.0, 
+          11.3.0, 11.2.0, 11.1.0, 
+          10.4.0, 10.3.0, 10.2.0, 10.1.0, 
+          9.5.0, 9.4.0, 9.3.0, 9.2.0, 9.1.0, 
+          8.5.0, ]
+    name: Build Ubuntu-22.04 Docker-GCC:${{ matrix.gcc-version }}
     runs-on: ubuntu-22.04
-    env:
-      LD_LIBRARY_PATH: dist/
+    container:
+      image: gcc:${{ matrix.gcc-version }}
     steps:
-      - uses: actions/checkout@v3.1.0
-      - name: init
-        run: shell/init.sh
-      - name: SHA-1 Compile
-        run: shell/SHA-1_Compile.sh
-      - name: Crypto Compile
-        run: shell/Crypto_Compile.sh
+    - uses: actions/checkout@v3.1.0
+    - name: Build
+      run: make init && make
+

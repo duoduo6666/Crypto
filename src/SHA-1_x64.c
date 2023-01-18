@@ -83,7 +83,7 @@ unsigned int* SHA1_Computation(unsigned char M[64],unsigned int H[5]){
     return H;
 }
 
-int* SHA1(char const message[],unsigned long const len){
+int* SHA1(char message[],unsigned long len){
     static unsigned int H[5] = {0x67452301,0xefcdab89,0x98badcfe,0x10325476,0xc3d2e1f0};
     unsigned long e = len * 8;
     unsigned int zero = (448-((e+8)%512)) / 8;
@@ -106,6 +106,22 @@ int* SHA1(char const message[],unsigned long const len){
         H[4] = t[4];
     }
     return H;
+}
+
+char* SHA1_hexstr(char message[], unsigned long len, char hex[16]){
+    unsigned int* H = SHA1(message, len);
+    static char str[41];
+
+    char i = 0;
+    for (char i0 = 0; i0 < 5; i0++){
+        for (char i1 = 24; i1 >= 0; i1-=8){
+            str[i] = hex[(unsigned char)(H[i0]>>i1) / 16];
+            i++;
+            str[i] = hex[(unsigned char)(H[i0]>>i1) % 16];
+            i++;
+        }
+    }
+    return str;
 }
 
 // benchmark
