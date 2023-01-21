@@ -1,9 +1,19 @@
 # Crypto-C
-Build 
-```Bash
+use
+```bash
+crypto SHA-1 abc
+```
+
+Build
+```bash
 make init && make
 ```
 or
-```Bash
+```bash
 ./GCC-build.sh
+```
+
+pack
+```bash
+make init && make && make pack
 ```
