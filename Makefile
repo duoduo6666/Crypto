@@ -9,8 +9,8 @@ CBIT_FLAG	= -m64
 CFLAGS		= -l $(LIB) -L $(LIBDIR) $(CBIT_FLAG) -Wl,-rpath,'$$ORIGIN/$(LIBDIR_)' -O3 
 CDLL_FLAGS	=  $(CBIT_FLAG) -fPIC -shared -O3 
 
-$(BUILDDIR)/crypto : $(LIBDIR)/libSHA-1_x64.so src/crypto.c
-	$(CC) src/str.c src/CLI.c src/crypto.c $(CFLAGS) -o $(BUILDDIR)/crypto
+$(BUILDDIR)/crypto : src/crypto.c $(LIBDIR)/libSHA-1_x64.so 
+	$(CC) src/str.c src/CLI.c src/ALG.c src/crypto.c $(CFLAGS) -o $(BUILDDIR)/crypto
 
 $(LIBDIR)/libSHA-1_x64.so : src/SHA-1_x64.c
 	$(CC) src/SHA-1_x64.c $(CDLL_FLAGS) -o $(LIBDIR)/libSHA-1_x64.so
