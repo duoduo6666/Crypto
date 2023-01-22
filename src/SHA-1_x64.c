@@ -1,8 +1,3 @@
-#include <stdio.h>
-#include <time.h>
-#include <signal.h>
-#include <stdlib.h>
-
 unsigned int const K[80] = {
     0x5a827999,0x5a827999,0x5a827999,0x5a827999,
     0x5a827999,0x5a827999,0x5a827999,0x5a827999,
@@ -122,28 +117,4 @@ char* SHA1_hexstr(char message[], unsigned long len, char hex[16]){
         }
     }
     return str;
-}
-
-// benchmark
-void ctrl_exit(int signum)
-{
-    printf("\033[?25h");    // 显示光标
-    printf("\n");
-    exit(0);
-}
-
-void SHA1_benchmark(){
-    char data[] = "abc";
-    unsigned int len = 3;
-    clock_t start, end;
-    signal(SIGINT, ctrl_exit);
-    printf("\033[?25l");    // 隐藏光标
-    while (1){
-        start = clock();
-        for(unsigned int i = 0; i < 1024; i++){
-            SHA1(data,len);
-        }
-        end = clock();
-        printf("\r%lu/s",CLOCKS_PER_SEC/(end-start)*1024);
-    }
 }
