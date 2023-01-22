@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "../include/ERROR.h"
-#include "../include/ALG.h"
+#include "../include/crypto.ALG.h"
 #include "../include/str.h"
 
 int main(unsigned int argc, char *argv[]){
@@ -17,7 +17,7 @@ int main(unsigned int argc, char *argv[]){
     while (str_cmp(alg[i].name,argv[1]) == 0)
     {
         i++;
-        if (i >= ALGN){printf(ERROR3, argv[1]);return 3;}
+        if (i >= ALGN){printf(ERROR3, argv[1]); return 3;}
     }
     alg[i].fp(argc, argv);
     

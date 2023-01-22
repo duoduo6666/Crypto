@@ -1,4 +1,4 @@
-#include "../include/CLI.h"
+#include "../include/crypto.CLI.h"
 
 #define ALGN    256 // ALG number
 #define ALGNL   256 // ALG name length
