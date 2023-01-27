@@ -8,10 +8,6 @@ Build
 ```bash
 make init && make
 ```
-or
-```bash
-./GCC-build.sh
-```
 
 pack
 ```bash
