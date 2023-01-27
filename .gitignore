@@ -54,3 +54,4 @@ dkms.conf
 # duoduo
 dist/*
 build/*
+*.bundle
