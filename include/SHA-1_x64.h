@@ -1,10 +1,12 @@
+#include <stdint.h>
+
 #ifndef _SHA1_x64_H_
 #define _SHA1_x64_H_
 
-unsigned int* SHA1_Computation(unsigned char M[64],unsigned int H[5]);
+uint32_t* SHA1_Computation(uint32_t M[64],uint32_t H[5]);
 
-int* SHA1(char message[],unsigned long len);
-char* SHA1_hexstr(char message[],unsigned long len, char hex[16]);
+int32_t* SHA1(char message[],uint64_t len);
+char* SHA1_hexstr(char message[],uint64_t len, char hex[16]);
 
 void SHA1_benchmark();
 
