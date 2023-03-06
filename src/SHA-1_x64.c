@@ -80,8 +80,12 @@ uint32_t* SHA1_Computation(uint8_t M[64],uint32_t H[5]){
     return H;
 }
 
+uint32_t H[5];
+
 int32_t* SHA1(char message[],uint64_t len){
-    static uint32_t H[5] = {0x67452301,0xefcdab89,0x98badcfe,0x10325476,0xc3d2e1f0};
+    H[0] = 0x67452301; H[1] = 0xefcdab89;
+    H[2] = 0x98badcfe; H[3] = 0x10325476;
+    H[4] = 0xc3d2e1f0;
     uint64_t e = len * 8;
     uint32_t zero = (448-((e+8)%512)) / 8;
     uint64_t M_len = zero+len+9;
@@ -93,8 +97,8 @@ int32_t* SHA1(char message[],uint64_t len){
     for (uint64_t i = len+1; i < M_len; i++){
         M[i] = 0;
     }
-    M[M_len-8]=e>>56;M[M_len-7]=e>>48;M[M_len-6]=e>>40;M[M_len-5]=e>>32;
-    M[M_len-4]=e>>24;M[M_len-3]=e>>16;M[M_len-2]=e>>8;M[M_len-1]=e;
+    M[M_len-8]=e>>56; M[M_len-7]=e>>48; M[M_len-6]=e>>40; M[M_len-5]=e>>32;
+    M[M_len-4]=e>>24; M[M_len-3]=e>>16; M[M_len-2]=e>>8;  M[M_len-1]=e;
     
     for (uint32_t i = 0; i < M_len; i+=64){
         uint32_t* t = SHA1_Computation(&M[i], H);
