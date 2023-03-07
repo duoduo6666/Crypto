@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "../include/ERROR.h"
-#include "../include/crypto.ALG.h"
+#include "../include/ALG.h"
 #include "../include/str.h"
 
 int main(unsigned int argc, char *argv[]){
