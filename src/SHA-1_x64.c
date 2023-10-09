@@ -1,5 +1,10 @@
 #include <stdint.h>
 
+#define Ch(x, y, z) ((x&y) ^ ((~x)&z))
+#define Parity(x, y, z) (x ^ y ^ z)
+#define Maj(x, y, z) ((x&y) ^ (x&z) ^ (y&z))
+#define ROTL(x, n) (((x) << (n)) | ((x) >> (32 - (n))))
+
 uint32_t K[80] = {
     0x5a827999,0x5a827999,0x5a827999,0x5a827999,
     0x5a827999,0x5a827999,0x5a827999,0x5a827999,
@@ -26,34 +31,6 @@ uint32_t K[80] = {
     0xca62c1d6,0xca62c1d6,0xca62c1d6,0xca62c1d6,
 };
 
-uint32_t Ch(uint32_t x, uint32_t y, uint32_t z){
-    return (x&y) ^ ((~x)&z);
-}
-uint32_t Parity(uint32_t x, uint32_t y, uint32_t z){
-    return x ^ y ^ z;
-}
-uint32_t Maj(uint32_t x, uint32_t y, uint32_t z){
-    return (x&y) ^ (x&z) ^ (y&z);
-}
-uint32_t f(uint8_t t, uint32_t x, uint32_t y, uint32_t z){
-    if (t <= 19){
-        return Ch(x,y,z);
-    }
-    if (t <= 39){
-        return Parity(x,y,z);
-    }
-    if (t <= 59){
-        return Maj(x,y,z);
-    }
-    if (t <= 79){
-        return Parity(x,y,z);
-    }
-}
-
-uint32_t ROTL(uint32_t x, uint8_t n){
-    return ((x << n) | (x >> (32 - n)));
-}
-
 uint32_t* SHA1_Computation(uint8_t M[64],uint32_t H[5]){
     uint32_t W[80];
     for (uint8_t t = 0; t < 16; t++){
@@ -63,13 +40,29 @@ uint32_t* SHA1_Computation(uint8_t M[64],uint32_t H[5]){
         W[t] = ROTL(W[t-3]	^ W[t-8] ^ W[t-14] ^ W[t-16], 1);
     }
     uint32_t a=H[0], b=H[1], c=H[2], d=H[3], e=H[4], T;
-    for (uint8_t t = 0; t < 80; t++){
-        T = ROTL(a,5) + f(t,b,c,d) + e + K[t] + W[t];
-        e = d;
-        d = c;
+    for (uint8_t t = 0; t < 20; t++){
+        T = ROTL(a,5) + Ch(b,c,d) + e + K[t] + W[t];
+        e = d; d = c;
         c = ROTL(b,30);
-        b = a;
-        a = T;
+        b = a; a = T;
+    }
+    for (uint8_t t = 20; t < 40; t++){
+        T = ROTL(a,5) + Parity(b,c,d) + e + K[t] + W[t];
+        e = d; d = c;
+        c = ROTL(b,30);
+        b = a; a = T;
+    }
+    for (uint8_t t = 40; t < 60; t++){
+        T = ROTL(a,5) + Maj(b,c,d) + e + K[t] + W[t];
+        e = d; d = c;
+        c = ROTL(b,30);
+        b = a; a = T;
+    }
+    for (uint8_t t = 60; t < 80; t++){
+        T = ROTL(a,5) + Parity(b,c,d) + e + K[t] + W[t];
+        e = d; d = c;
+        c = ROTL(b,30);
+        b = a; a = T;
     }
     H[0] = (a+H[0]);
     H[1] = (b+H[1]);
